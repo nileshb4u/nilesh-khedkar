@@ -73,7 +73,7 @@ const App: React.FC = () => {
                 className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-light-bg-secondary dark:border-dark-bg-secondary shadow-md object-cover" 
              />
             <h1 className="text-4xl md:text-5xl font-bold text-light-text-primary dark:text-dark-text-primary font-heading">{cvData.header.name}</h1>
-            <h2 className="text-xl md:text-2xl text-brand-primary font-semibold mt-2 font-heading">{cvData.header.title}</h2>
+            <h2 className="text-xl md:text-2xl text-brand-primary dark:text-orange-400 font-semibold mt-2 font-heading">{cvData.header.title}</h2>
             <p className="max-w-3xl mx-auto mt-4 text-light-text-secondary dark:text-dark-text-secondary">
                 I help organizations architect and execute AI-powered digital transformations that drive operational excellence and sustainable growth. Feel free to ask my AI assistant how my expertise in industrial AI and strategic leadership can deliver value for your team.
             </p>

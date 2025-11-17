@@ -41,7 +41,7 @@ const MinimizeIcon = () => (
 );
 
 // Renders text with simple markdown (bold and unordered lists)
-const renderFormattedText = (text: string) => {
+const renderFormattedText = (text: string): React.ReactElement => {
     const lines = text.split('\n');
     const elements: React.ReactElement[] = [];
     let listItems: string[] = [];
@@ -87,7 +87,7 @@ const renderFormattedText = (text: string) => {
 export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullScreen, setIsFullScreen, onShowCv }) => {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [input, setInput] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const chatService = useRef<any>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -116,6 +116,14 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
         const initialize = () => {
             setIsLoading(true);
             setError(null);
+
+            if (!process.env.API_KEY) {
+                setError("The AI assistant is not configured. An API key is required to enable chat functionality.");
+                setIsLoading(false);
+                setMessages([]);
+                return;
+            }
+
             try {
                 // Initialize synchronously
                 chatService.current = initializeChat(language);
@@ -236,7 +244,7 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
                        </div>
                     )}
 
-                    {isLoading && messages.length > 0 && (
+                    {isLoading && (
                          <div className="flex items-start gap-3">
                             <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-dark-bg-tertiary rounded-full flex items-center justify-center border border-blue-200 dark:border-blue-900">
                                 <AssistantIcon />
@@ -265,7 +273,7 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
             </div>
             
             <div className={`p-4 md:p-6 border-t border-light-bg-tertiary dark:border-dark-bg-tertiary ${isFullScreen && 'bg-light-bg-secondary dark:bg-dark-bg-secondary'}`}>
-                 {messages.length <= 1 && !isLoading && (
+                 {messages.length <= 1 && !isLoading && !error && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
                       {suggestions.map(s => (
                         <button key={s} onClick={() => handleSuggestionClick(s)} className="text-left text-sm bg-light-bg-tertiary dark:bg-dark-bg-tertiary hover:bg-gray-200 dark:hover:bg-gray-600 p-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-light">
@@ -280,14 +288,14 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder="Ask about my experience, projects, or skills..."
-                        className="w-full pl-4 pr-12 py-3 bg-light-bg-tertiary dark:bg-dark-bg-tertiary border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary text-light-text-primary dark:text-dark-text-primary"
-                        disabled={isLoading}
+                        placeholder={error ? "Chat is disabled." : "Ask about my experience, projects, or skills..."}
+                        className="w-full pl-4 pr-12 py-3 bg-light-bg-tertiary dark:bg-dark-bg-tertiary border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary text-light-text-primary dark:text-dark-text-primary disabled:cursor-not-allowed disabled:opacity-60"
+                        disabled={isLoading || !!error}
                         aria-label="Chat input"
                     />
                     <button
                         type="submit"
-                        disabled={isLoading || !input.trim()}
+                        disabled={isLoading || !input.trim() || !!error}
                         className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-brand-primary text-white p-2 rounded-full disabled:bg-gray-400 hover:bg-brand-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                         aria-label="Send message"
                     >
