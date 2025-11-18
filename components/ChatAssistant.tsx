@@ -180,17 +180,17 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, onShowCv
                     {messages.map((msg, index) => (
                         <div key={index} className={`flex items-start gap-3 w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             {msg.role === 'model' && (
-                                <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-dark-bg-tertiary rounded-full flex items-center justify-center border border-blue-200 dark:border-blue-900">
+                                <div className="flex-shrink-0 w-8 h-8 bg-white dark:bg-dark-bg-tertiary rounded-full flex items-center justify-center border border-orange-200 dark:border-orange-900/30 shadow-sm">
                                    <AssistantIcon />
                                 </div>
                             )}
-                            <div className={`max-w-[85%] p-3 rounded-2xl ${msg.role === 'user' ? 'bg-brand-secondary text-white rounded-br-none' : 'bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-bl-none'}`}>
-                                <div className="text-sm">
+                            <div className={`max-w-[85%] p-3.5 rounded-2xl shadow-sm ${msg.role === 'user' ? 'bg-brand-primary text-white rounded-br-none' : 'bg-white dark:bg-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-bl-none border border-light-bg-tertiary dark:border-dark-bg-secondary'}`}>
+                                <div className="text-sm leading-relaxed">
                                   {msg.role === 'user' ? msg.text : renderFormattedText(msg.text)}
                                 </div>
                             </div>
                              {msg.role === 'user' && (
-                                <div className="flex-shrink-0 w-8 h-8 bg-gray-500 rounded-full flex items-center justify-center">
+                                <div className="flex-shrink-0 w-8 h-8 bg-stone-500 rounded-full flex items-center justify-center shadow-sm">
                                    <UserIcon />
                                 </div>
                             )}
@@ -203,14 +203,14 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, onShowCv
                          <div className="flex flex-col sm:flex-row gap-2 mt-2">
                             <button
                                 onClick={onShowCv}
-                                className="px-4 py-2 text-sm font-medium text-brand-primary bg-blue-100 dark:bg-dark-bg-tertiary dark:text-dark-text-primary border border-transparent rounded-lg hover:bg-blue-200 dark:hover:bg-gray-600 transition-colors"
+                                className="px-4 py-2 text-sm font-medium text-brand-primary bg-orange-50 dark:bg-dark-bg-tertiary dark:text-dark-text-primary border border-orange-100 dark:border-dark-bg-secondary rounded-lg hover:bg-orange-100 dark:hover:bg-stone-800 transition-colors"
                             >
                                 View Full CV
                             </button>
                             <a
                                 href={cvData.header.cvPdfUrl}
                                 download="Nilesh_Khedkar_CV.pdf"
-                                className="px-4 py-2 text-sm font-medium text-brand-primary bg-blue-100 dark:bg-dark-bg-tertiary dark:text-dark-text-primary border border-transparent rounded-lg hover:bg-blue-200 dark:hover:bg-gray-600 transition-colors text-center"
+                                className="px-4 py-2 text-sm font-medium text-brand-primary bg-orange-50 dark:bg-dark-bg-tertiary dark:text-dark-text-primary border border-orange-100 dark:border-dark-bg-secondary rounded-lg hover:bg-orange-100 dark:hover:bg-stone-800 transition-colors text-center"
                             >
                                 Download PDF
                             </a>
@@ -220,14 +220,14 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, onShowCv
 
                     {isLoading && (
                          <div className="flex items-start gap-3">
-                            <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-dark-bg-tertiary rounded-full flex items-center justify-center border border-blue-200 dark:border-blue-900">
+                            <div className="flex-shrink-0 w-8 h-8 bg-white dark:bg-dark-bg-tertiary rounded-full flex items-center justify-center border border-orange-200 dark:border-orange-900/30">
                                 <AssistantIcon />
                             </div>
-                            <div className="max-w-[85%] p-3 rounded-2xl bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-bl-none">
+                            <div className="max-w-[85%] p-3.5 rounded-2xl bg-white dark:bg-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-bl-none border border-light-bg-tertiary dark:border-dark-bg-secondary">
                                <div className="flex items-center space-x-1 h-5">
-                                    <span className="w-2 h-2 bg-light-text-secondary dark:bg-dark-text-secondary rounded-full animate-pulse [animation-delay:-0.3s]"></span>
-                                    <span className="w-2 h-2 bg-light-text-secondary dark:bg-dark-text-secondary rounded-full animate-pulse [animation-delay:-0.15s]"></span>
-                                    <span className="w-2 h-2 bg-light-text-secondary dark:bg-dark-text-secondary rounded-full animate-pulse"></span>
+                                    <span className="w-2 h-2 bg-orange-400 dark:bg-orange-600 rounded-full animate-pulse [animation-delay:-0.3s]"></span>
+                                    <span className="w-2 h-2 bg-orange-400 dark:bg-orange-600 rounded-full animate-pulse [animation-delay:-0.15s]"></span>
+                                    <span className="w-2 h-2 bg-orange-400 dark:bg-orange-600 rounded-full animate-pulse"></span>
                                </div>
                             </div>
                         </div>
@@ -237,20 +237,20 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, onShowCv
                 
                 {/* Scroll buttons */}
                 <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-10">
-                    <button onClick={() => handleScroll('up')} className="p-2 rounded-full bg-black bg-opacity-20 text-light-text-primary dark:text-dark-text-primary hover:bg-opacity-40 transition-all" aria-label="Scroll up">
+                    <button onClick={() => handleScroll('up')} className="p-2 rounded-full bg-stone-900/10 dark:bg-white/10 text-light-text-primary dark:text-dark-text-primary hover:bg-stone-900/20 dark:hover:bg-white/20 transition-all backdrop-blur-sm" aria-label="Scroll up">
                         <ChevronUpIcon />
                     </button>
-                    <button onClick={() => handleScroll('down')} className="p-2 rounded-full bg-black bg-opacity-20 text-light-text-primary dark:text-dark-text-primary hover:bg-opacity-40 transition-all" aria-label="Scroll down">
+                    <button onClick={() => handleScroll('down')} className="p-2 rounded-full bg-stone-900/10 dark:bg-white/10 text-light-text-primary dark:text-dark-text-primary hover:bg-stone-900/20 dark:hover:bg-white/20 transition-all backdrop-blur-sm" aria-label="Scroll down">
                         <ChevronDownIcon />
                     </button>
                 </div>
             </div>
             
-            <div className="p-4 md:p-6 border-t border-light-bg-tertiary dark:border-dark-bg-tertiary bg-light-bg-secondary dark:bg-dark-bg-secondary">
+            <div className="p-4 md:p-6 border-t border-light-bg-tertiary dark:border-dark-bg-secondary bg-white dark:bg-dark-bg-secondary">
                  {messages.length <= 1 && !isLoading && !error && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
                       {suggestions.map(s => (
-                        <button key={s} onClick={() => handleSuggestionClick(s)} className="text-left text-xs md:text-sm bg-light-bg-tertiary dark:bg-dark-bg-tertiary hover:bg-gray-200 dark:hover:bg-gray-600 p-2 md:p-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-light">
+                        <button key={s} onClick={() => handleSuggestionClick(s)} className="text-left text-xs md:text-sm bg-light-bg dark:bg-dark-bg-tertiary hover:bg-orange-50 dark:hover:bg-stone-800 border border-transparent hover:border-orange-200 dark:hover:border-stone-700 p-3 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-brand-light">
                           <p className="font-medium text-light-text-primary dark:text-dark-text-primary truncate">{s}</p>
                         </button>
                       ))}
@@ -263,14 +263,14 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, onShowCv
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder={error ? "Chat is disabled." : "Ask about my experience..."}
-                        className="w-full pl-4 pr-12 py-3 bg-light-bg-tertiary dark:bg-dark-bg-tertiary border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary text-light-text-primary dark:text-dark-text-primary disabled:cursor-not-allowed disabled:opacity-60 shadow-inner"
+                        className="w-full pl-4 pr-12 py-3.5 bg-light-bg dark:bg-dark-bg-tertiary border border-light-bg-tertiary dark:border-dark-bg-secondary rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary text-light-text-primary dark:text-dark-text-primary disabled:cursor-not-allowed disabled:opacity-60 shadow-inner placeholder-stone-400"
                         disabled={isLoading || !!error}
                         aria-label="Chat input"
                     />
                     <button
                         type="submit"
                         disabled={isLoading || !input.trim() || !!error}
-                        className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-brand-primary text-white p-2 rounded-full disabled:bg-gray-400 hover:bg-brand-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                        className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-brand-primary text-white p-2 rounded-full disabled:bg-stone-300 dark:disabled:bg-stone-700 hover:bg-brand-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                         aria-label="Send message"
                     >
                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

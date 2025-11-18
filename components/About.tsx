@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface AboutProps {
@@ -28,7 +27,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
           </li>
         ))}
       </ul>
-      <p className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-500/30 text-blue-800 dark:text-blue-300 rounded-lg text-sm italic">{content.note}</p>
+      <p className="mt-4 p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-500/30 text-orange-800 dark:text-orange-300 rounded-lg text-sm italic">{content.note}</p>
     </section>
   );
 };

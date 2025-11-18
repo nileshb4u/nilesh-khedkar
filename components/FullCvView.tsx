@@ -20,14 +20,14 @@ const BackIcon = () => (
 export const FullCvView: React.FC<FullCvViewProps> = ({ data, onBackToChat }) => {
   return (
     <div className="flex-grow w-full">
-      <div className="sticky top-0 bg-light-bg/80 dark:bg-dark-bg/80 backdrop-blur-sm z-10 py-3 px-4 md:px-6 border-b border-light-bg-tertiary dark:border-dark-bg-tertiary">
+      <div className="sticky top-0 bg-light-bg/90 dark:bg-dark-bg/90 backdrop-blur-sm z-10 py-3 px-4 md:px-6 border-b border-light-bg-tertiary dark:border-dark-bg-tertiary">
          <div className="max-w-4xl mx-auto">
             <button 
                 onClick={onBackToChat} 
-                className="flex items-center px-4 py-2 text-sm font-medium text-brand-primary bg-blue-100 dark:bg-dark-bg-secondary dark:text-dark-text-primary border border-transparent rounded-lg hover:bg-blue-200 dark:hover:bg-dark-bg-tertiary transition-colors"
+                className="flex items-center px-4 py-2 text-sm font-medium text-brand-primary bg-orange-50 dark:bg-dark-bg-secondary dark:text-dark-text-primary border border-transparent hover:border-orange-200 rounded-lg hover:bg-orange-100 dark:hover:bg-dark-bg-tertiary transition-colors"
             >
                 <BackIcon />
-                Back to AI Assistant
+                Back to Home
             </button>
          </div>
       </div>

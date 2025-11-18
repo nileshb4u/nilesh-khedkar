@@ -36,6 +36,12 @@ export interface EducationItem {
     institution: string;
 }
 
+export interface Achievement {
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
 export interface CVData {
     header: HeaderData;
     aboutMe: {
@@ -48,6 +54,7 @@ export interface CVData {
     experience: ExperienceItem[];
     certifications: Certification[];
     education: EducationItem[];
+    achievements: Achievement[];
 }
 
 export interface ChatMessage {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChatAssistant } from './components/ChatAssistant';
 import { FullCvView } from './components/FullCvView';
+import { AchievementsView } from './components/AchievementsView';
 import { cvData } from './constants';
 
 
@@ -59,6 +60,14 @@ const DownloadIcon = () => (
   </svg>
 );
 
+const TrophyIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+    <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v2.586l-1.707 1.707A.996.996 0 0016 10v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6c0-.266.105-.52.293-.707L2.586 7.586A2 2 0 012 5z" />
+    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+  </svg>
+);
+
 const BackIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -68,7 +77,7 @@ const BackIcon = () => (
 const App: React.FC = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [language, setLanguage] = useState('English');
-  const [viewMode, setViewMode] = useState<'landing' | 'chat' | 'cv'>('landing');
+  const [viewMode, setViewMode] = useState<'landing' | 'chat' | 'cv' | 'achievements'>('landing');
   
   useEffect(() => {
     const root = window.document.documentElement;
@@ -86,70 +95,84 @@ const App: React.FC = () => {
 
   const languages = ['English', 'Spanish', 'French', 'German', 'Hindi', 'Arabic', 'Japanese', 'Mandarin'];
 
-  const TopControls = () => (
-    <div className="flex items-center gap-3">
-      <select
-        value={language}
-        onChange={(e) => setLanguage(e.target.value)}
-        className="bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary rounded-md p-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary text-light-text-primary dark:text-dark-text-primary"
-        aria-label="Select language"
-      >
-        {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
-      </select>
-      
-      <button onClick={toggleTheme} className="p-1.5 rounded-full hover:bg-light-bg-tertiary dark:hover:bg-dark-bg-tertiary transition-colors text-light-text-primary dark:text-dark-text-primary" aria-label="Toggle theme">
-        {theme === 'light' ? <MoonIcon /> : <SunIcon />}
-      </button>
-    </div>
+  const ThemeToggle = () => (
+    <button onClick={toggleTheme} className="p-1.5 rounded-full hover:bg-light-bg-tertiary dark:hover:bg-dark-bg-tertiary transition-colors text-light-text-primary dark:text-dark-text-primary" aria-label="Toggle theme">
+      {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+    </button>
+  );
+
+  const LanguageSelector = () => (
+    <select
+      value={language}
+      onChange={(e) => setLanguage(e.target.value)}
+      className="bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary rounded-md p-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary text-light-text-primary dark:text-dark-text-primary cursor-pointer"
+      aria-label="Select language"
+    >
+      {languages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
+    </select>
   );
 
   const LandingView = () => (
-    <main className="min-h-screen flex flex-col items-center justify-center p-6 relative">
-        {/* Header Controls for Landing */}
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
+        {/* Header Controls for Landing: Theme Toggle Only */}
         <header className="absolute top-0 right-0 p-4 md:p-6 z-20">
-            <TopControls />
+            <ThemeToggle />
         </header>
 
-        <div className="max-w-3xl w-full flex flex-col items-center text-center space-y-8">
+        <div className="max-w-md w-full flex flex-col items-center text-center space-y-6 md:space-y-8 z-10 mt-[-20px]">
             {/* Profile Section */}
-            <div className="space-y-4">
-                <img 
-                    src={cvData.header.imageUrl} 
-                    alt="Nilesh S. Khedkar" 
-                    className="w-40 h-40 md:w-48 md:h-48 rounded-full mx-auto border-4 border-light-bg-secondary dark:border-dark-bg-secondary shadow-lg object-cover" 
-                />
-                <div>
-                    <h1 className="text-4xl md:text-5xl font-bold text-light-text-primary dark:text-dark-text-primary font-heading">{cvData.header.name}</h1>
-                    <h2 className="text-xl md:text-2xl text-brand-primary dark:text-orange-400 font-semibold mt-2 font-heading">{cvData.header.title}</h2>
+            <div className="space-y-3 md:space-y-4">
+                <div className="relative mx-auto inline-block">
+                    <img 
+                        src={cvData.header.imageUrl} 
+                        alt="Nilesh S. Khedkar" 
+                        className="w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-white dark:border-dark-bg-secondary shadow-xl object-cover" 
+                    />
+                    <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-500 border-2 border-white dark:border-dark-bg rounded-full"></div>
                 </div>
-                <p className="text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto leading-relaxed">
-                    I help organizations architect and execute AI-powered digital transformations. 
-                    <span className="hidden md:inline"> Deep expertise in industrial AI, strategic leadership, and operational excellence.</span>
+                <div>
+                    <h1 className="text-3xl md:text-5xl font-bold text-light-text-primary dark:text-dark-text-primary font-heading leading-tight tracking-tight">{cvData.header.name}</h1>
+                    <h2 className="text-lg md:text-2xl text-brand-primary font-semibold mt-1 font-heading">{cvData.header.title}</h2>
+                </div>
+                <p className="text-light-text-secondary dark:text-dark-text-secondary text-sm md:text-base max-w-xs md:max-w-lg mx-auto leading-relaxed px-4">
+                    Architecting AI-powered digital transformations for enterprise operations.
                 </p>
             </div>
 
-            {/* Social Icons */}
-            <div className="flex gap-6 text-light-text-secondary dark:text-dark-text-secondary">
-                <a href={`mailto:${cvData.header.email}`} className="hover:text-brand-primary transition-colors transform hover:scale-110"><MailIcon /></a>
-                <a href={cvData.header.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors transform hover:scale-110"><LinkedInIcon /></a>
-                <a href={cvData.header.github} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors transform hover:scale-110"><GitHubIcon /></a>
-                <a href={cvData.header.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors transform hover:scale-110"><TwitterIcon /></a>
+            {/* Language Selector & Social Icons - Grouped together */}
+            <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-light-text-secondary dark:text-dark-text-secondary py-2">
+                <LanguageSelector />
+                <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 hidden md:block"></div>
+                <div className="flex gap-6">
+                    <a href={`mailto:${cvData.header.email}`} className="hover:text-brand-primary transition-colors transform hover:scale-110"><MailIcon /></a>
+                    <a href={cvData.header.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors transform hover:scale-110"><LinkedInIcon /></a>
+                    <a href={cvData.header.github} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors transform hover:scale-110"><GitHubIcon /></a>
+                    <a href={cvData.header.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors transform hover:scale-110"><TwitterIcon /></a>
+                </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col w-full max-w-sm gap-4 mt-4">
+            <div className="flex flex-col w-full gap-3 px-4">
                 <button 
                     onClick={() => setViewMode('chat')}
-                    className="w-full flex items-center justify-center px-6 py-4 bg-brand-primary hover:bg-brand-secondary text-white rounded-xl shadow-lg transition-all transform hover:-translate-y-1 font-bold text-lg"
+                    className="w-full flex items-center justify-center px-6 py-4 bg-brand-primary hover:bg-brand-secondary text-white rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 font-bold text-lg"
                 >
                     <ChatIcon />
                     Talk to my AI Assistant
                 </button>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <button 
+                    onClick={() => setViewMode('achievements')}
+                    className="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-brand-light/50 dark:border-brand-secondary/50 text-brand-secondary dark:text-brand-light rounded-xl hover:bg-orange-50 dark:hover:bg-dark-bg-tertiary transition-colors font-bold shadow-sm text-base md:text-lg"
+                >
+                    <TrophyIcon />
+                    View Achievements
+                </button>
+
+                <div className="grid grid-cols-2 gap-3">
                     <button 
                         onClick={() => setViewMode('cv')}
-                        className="flex items-center justify-center px-4 py-3 bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium shadow-sm"
+                        className="flex items-center justify-center px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-xl hover:bg-orange-50 dark:hover:bg-dark-bg-tertiary transition-colors font-medium shadow-sm text-sm md:text-base"
                     >
                         <DocumentIcon />
                         View Full CV
@@ -158,7 +181,7 @@ const App: React.FC = () => {
                         href={cvData.header.cvPdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center px-4 py-3 bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium shadow-sm"
+                        className="flex items-center justify-center px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-xl hover:bg-orange-50 dark:hover:bg-dark-bg-tertiary transition-colors font-medium shadow-sm text-sm md:text-base"
                     >
                         <DownloadIcon />
                         Download PDF
@@ -176,9 +199,9 @@ const App: React.FC = () => {
   const ChatView = () => (
     <main className="flex flex-col h-screen w-full bg-light-bg dark:bg-dark-bg">
         {/* Minimalist 2-Row Header */}
-        <div className="flex-shrink-0 bg-light-bg-secondary dark:bg-dark-bg-secondary border-b border-light-bg-tertiary dark:border-dark-bg-tertiary shadow-sm z-10">
-            {/* Row 1: Navigation & Name & Controls */}
-            <div className="flex items-center justify-between px-4 py-2 md:px-6">
+        <div className="flex-shrink-0 bg-white dark:bg-dark-bg-secondary border-b border-light-bg-tertiary dark:border-dark-bg-tertiary shadow-sm z-10">
+            {/* Row 1: Navigation & Name & Theme Toggle */}
+            <div className="flex items-center justify-between px-3 py-2 md:px-6">
                 <button 
                     onClick={() => setViewMode('landing')}
                     className="p-2 -ml-2 text-light-text-secondary dark:text-dark-text-secondary hover:text-brand-primary dark:hover:text-brand-primary transition-colors rounded-full hover:bg-light-bg-tertiary dark:hover:bg-dark-bg-tertiary"
@@ -187,19 +210,23 @@ const App: React.FC = () => {
                     <BackIcon />
                 </button>
                 
-                <h1 className="text-lg font-bold text-light-text-primary dark:text-dark-text-primary truncate font-heading">
+                <h1 className="text-base md:text-lg font-bold text-light-text-primary dark:text-dark-text-primary truncate font-heading flex-1 text-center px-2">
                     {cvData.header.name}
                 </h1>
 
-                <TopControls />
+                <ThemeToggle />
             </div>
 
-            {/* Row 2: Social Contacts (Minimal) */}
-            <div className="flex justify-center gap-8 pb-2.5 pt-0.5 text-light-text-secondary dark:text-dark-text-secondary">
-                 <a href={`mailto:${cvData.header.email}`} className="hover:text-brand-primary transition-colors"><MailIcon /></a>
-                <a href={cvData.header.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors"><LinkedInIcon /></a>
-                <a href={cvData.header.github} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors"><GitHubIcon /></a>
-                <a href={cvData.header.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors"><TwitterIcon /></a>
+            {/* Row 2: Language Selector & Social Contacts */}
+            <div className="flex items-center justify-center gap-4 pb-2.5 pt-0.5 text-light-text-secondary dark:text-dark-text-secondary px-4 overflow-x-auto">
+                <LanguageSelector />
+                <div className="w-px h-4 bg-gray-300 dark:bg-gray-700 mx-1"></div>
+                <div className="flex gap-6 flex-shrink-0">
+                    <a href={`mailto:${cvData.header.email}`} className="hover:text-brand-primary transition-colors"><MailIcon /></a>
+                    <a href={cvData.header.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors"><LinkedInIcon /></a>
+                    <a href={cvData.header.github} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors"><GitHubIcon /></a>
+                    <a href={cvData.header.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors"><TwitterIcon /></a>
+                </div>
             </div>
         </div>
 
@@ -217,10 +244,19 @@ const App: React.FC = () => {
     <div className="bg-light-bg dark:bg-dark-bg min-h-screen font-sans text-light-text-primary dark:text-dark-text-primary transition-colors duration-300 overflow-hidden">
       {viewMode === 'landing' && <LandingView />}
       {viewMode === 'chat' && <ChatView />}
+      {viewMode === 'achievements' && (
+          <AchievementsView 
+            achievements={cvData.achievements} 
+            onBackToHome={() => setViewMode('landing')}
+            ThemeToggle={ThemeToggle}
+            LanguageSelector={LanguageSelector}
+          />
+      )}
       {viewMode === 'cv' && (
         <div className="h-screen overflow-y-auto">
-             <div className="absolute top-4 right-4 z-50">
-                 <TopControls />
+             <div className="absolute top-4 right-4 z-50 flex gap-2">
+                 <LanguageSelector />
+                 <ThemeToggle />
             </div>
             <FullCvView data={cvData} onBackToChat={() => setViewMode('landing')} />
         </div>

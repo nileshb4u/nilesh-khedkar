@@ -130,6 +130,38 @@ export const cvData: CVData = {
   education: [
       { degree: "Bachelor of Engineering - Mechanical", institution: "Nagpur University, Nagpur" },
       { degree: "Diploma in Mechanical Engineering", institution: "S. D. M. Polytechnic, Nagpur" }
+  ],
+  achievements: [
+    {
+        title: "Engineering Excellence Award 2024",
+        description: "Receiving the Engineering Services Excellence Award for Circular Economy digitalization initiatives.",
+        imageUrl: "https://placehold.co/600x800/ea580c/ffffff?text=Engineering+Excellence+Award"
+    },
+    {
+        title: "Citizen Development Days 2025",
+        description: "Recognized for enterprise automation leadership and fostering digital innovation ecosystems.",
+        imageUrl: "https://placehold.co/600x800/ea580c/ffffff?text=Citizen+Development+Days"
+    },
+    {
+        title: "MAHER AI Assistant Workbench",
+        description: "Demonstrating the AI Assistant Development Workbench for Maintenance challenges.",
+        imageUrl: "https://placehold.co/800x600/ea580c/ffffff?text=MAHER+AI+Workbench"
+    },
+    {
+        title: "Circular Economy Award",
+        description: "Corporate recognition for initiatives contributing to efficient resource utilization.",
+        imageUrl: "https://placehold.co/600x800/ea580c/ffffff?text=Circular+Economy+Award"
+    },
+    {
+        title: "MAHER Robot Launch",
+        description: "Speaking at the launch of the Maintenance Artificial Human Enterprise Robot (MAHER).",
+        imageUrl: "https://placehold.co/800x600/ea580c/ffffff?text=MAHER+Robot+Launch"
+    },
+    {
+        title: "Award of Appreciation",
+        description: "In recognition of outstanding efforts and contributions to Maintenance Artificial Human Enterprise Robot (MAHER).",
+        imageUrl: "https://placehold.co/600x800/ea580c/ffffff?text=Award+of+Appreciation"
+    }
   ]
 };
 
