@@ -5,8 +5,6 @@ import type { ChatMessage } from '../types';
 
 interface ChatAssistantProps {
     language: string;
-    isFullScreen: boolean;
-    setIsFullScreen: (isFullScreen: boolean) => void;
     onShowCv: () => void;
 }
 
@@ -31,12 +29,6 @@ const ChevronUpIcon = () => (
 const ChevronDownIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
       <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-    </svg>
-);
-
-const MinimizeIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
     </svg>
 );
 
@@ -84,7 +76,7 @@ const renderFormattedText = (text: string): React.ReactElement => {
 };
 
 
-export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullScreen, setIsFullScreen, onShowCv }) => {
+export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, onShowCv }) => {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(true);
@@ -142,10 +134,6 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
     const sendMessage = useCallback(async (messageText: string) => {
         if (!messageText.trim() || isLoading || !chatService.current) return;
         
-        if (messages.length <= 1) {
-            setIsFullScreen(true);
-        }
-
         setIsLoading(true);
         setError(null);
         setMessages(prev => [...prev, { role: 'user', text: messageText }]);
@@ -161,7 +149,7 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
         } finally {
             setIsLoading(false);
         }
-    }, [isLoading, messages.length, setIsFullScreen]);
+    }, [isLoading]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -182,25 +170,11 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
       "Summarize your role at Saudi Aramco."
     ];
     
-    const containerClasses = isFullScreen
-    ? "bg-light-bg dark:bg-dark-bg flex flex-col h-full w-full"
-    : "bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-2xl shadow-xl flex flex-col h-full max-h-[70vh] w-full max-w-3xl border border-light-bg-tertiary dark:border-dark-bg-tertiary transition-colors duration-300";
-
+    // Simplified container that takes full height/width of parent
+    const containerClasses = "flex flex-col h-full w-full bg-light-bg dark:bg-dark-bg transition-colors duration-300";
 
     return (
         <div className={containerClasses}>
-             {isFullScreen && (
-                <div className="flex-shrink-0 p-3 md:p-4 border-b border-light-bg-tertiary dark:border-dark-bg-tertiary flex justify-between items-center bg-light-bg-secondary dark:bg-dark-bg-secondary">
-                    <h3 className="text-lg font-bold font-heading text-light-text-primary dark:text-dark-text-primary">Ask me anything</h3>
-                    <button 
-                        onClick={() => setIsFullScreen(false)} 
-                        className="p-2 rounded-full hover:bg-light-bg-tertiary dark:hover:bg-dark-bg-tertiary transition-colors text-light-text-secondary dark:text-dark-text-secondary" 
-                        aria-label="Minimize chat"
-                    >
-                        <MinimizeIcon />
-                    </button>
-                </div>
-            )}
             <div className="flex-1 flex flex-col min-h-0 relative">
                 <div ref={scrollContainerRef} className="flex-grow overflow-y-auto p-4 md:p-6 space-y-6 scroll-smooth no-scrollbar">
                     {messages.map((msg, index) => (
@@ -260,24 +234,24 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
                     )}
                     <div ref={messagesEndRef} />
                 </div>
-                {!isFullScreen && (
-                    <div className="absolute bottom-4 right-4 flex flex-col gap-2">
-                        <button onClick={() => handleScroll('up')} className="p-2 rounded-full bg-black bg-opacity-40 text-white hover:bg-opacity-60 transition-opacity" aria-label="Scroll up">
-                            <ChevronUpIcon />
-                        </button>
-                        <button onClick={() => handleScroll('down')} className="p-2 rounded-full bg-black bg-opacity-40 text-white hover:bg-opacity-60 transition-opacity" aria-label="Scroll down">
-                            <ChevronDownIcon />
-                        </button>
-                    </div>
-                )}
+                
+                {/* Scroll buttons */}
+                <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-10">
+                    <button onClick={() => handleScroll('up')} className="p-2 rounded-full bg-black bg-opacity-20 text-light-text-primary dark:text-dark-text-primary hover:bg-opacity-40 transition-all" aria-label="Scroll up">
+                        <ChevronUpIcon />
+                    </button>
+                    <button onClick={() => handleScroll('down')} className="p-2 rounded-full bg-black bg-opacity-20 text-light-text-primary dark:text-dark-text-primary hover:bg-opacity-40 transition-all" aria-label="Scroll down">
+                        <ChevronDownIcon />
+                    </button>
+                </div>
             </div>
             
-            <div className={`p-4 md:p-6 border-t border-light-bg-tertiary dark:border-dark-bg-tertiary ${isFullScreen && 'bg-light-bg-secondary dark:bg-dark-bg-secondary'}`}>
+            <div className="p-4 md:p-6 border-t border-light-bg-tertiary dark:border-dark-bg-tertiary bg-light-bg-secondary dark:bg-dark-bg-secondary">
                  {messages.length <= 1 && !isLoading && !error && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
                       {suggestions.map(s => (
-                        <button key={s} onClick={() => handleSuggestionClick(s)} className="text-left text-sm bg-light-bg-tertiary dark:bg-dark-bg-tertiary hover:bg-gray-200 dark:hover:bg-gray-600 p-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-light">
-                          <p className="font-medium text-light-text-primary dark:text-dark-text-primary">{s}</p>
+                        <button key={s} onClick={() => handleSuggestionClick(s)} className="text-left text-xs md:text-sm bg-light-bg-tertiary dark:bg-dark-bg-tertiary hover:bg-gray-200 dark:hover:bg-gray-600 p-2 md:p-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-light">
+                          <p className="font-medium text-light-text-primary dark:text-dark-text-primary truncate">{s}</p>
                         </button>
                       ))}
                     </div>
@@ -288,8 +262,8 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ language, isFullSc
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder={error ? "Chat is disabled." : "Ask about my experience, projects, or skills..."}
-                        className="w-full pl-4 pr-12 py-3 bg-light-bg-tertiary dark:bg-dark-bg-tertiary border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary text-light-text-primary dark:text-dark-text-primary disabled:cursor-not-allowed disabled:opacity-60"
+                        placeholder={error ? "Chat is disabled." : "Ask about my experience..."}
+                        className="w-full pl-4 pr-12 py-3 bg-light-bg-tertiary dark:bg-dark-bg-tertiary border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary text-light-text-primary dark:text-dark-text-primary disabled:cursor-not-allowed disabled:opacity-60 shadow-inner"
                         disabled={isLoading || !!error}
                         aria-label="Chat input"
                     />
