@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import type { Achievement } from '../types';
 import { cvData } from '../constants';
 
@@ -51,6 +52,11 @@ const TwitterIcon = () => (
     </svg>
 );
 
+const FallbackIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-gray-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+);
 
 export const AchievementsView: React.FC<AchievementsViewProps> = ({ 
     achievements, 
@@ -60,6 +66,11 @@ export const AchievementsView: React.FC<AchievementsViewProps> = ({
 }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0); // -1 left, 1 right
+    const [imageError, setImageError] = useState(false);
+
+    useEffect(() => {
+        setImageError(false);
+    }, [currentIndex]);
 
     const nextSlide = () => {
         setDirection(1);
@@ -111,7 +122,7 @@ export const AchievementsView: React.FC<AchievementsViewProps> = ({
                 <div className="relative w-full max-w-3xl h-[70vh] flex flex-col bg-white dark:bg-dark-bg-tertiary rounded-2xl shadow-xl overflow-hidden border border-light-bg-tertiary dark:border-dark-bg-secondary">
                     
                     {/* Image Container */}
-                    <div className="flex-grow relative bg-black/5 dark:bg-black/20 overflow-hidden group">
+                    <div className="flex-grow relative bg-black/5 dark:bg-black/20 overflow-hidden group flex items-center justify-center">
                          {/* Navigation Overlay Buttons (Desktop) */}
                         <button 
                             onClick={prevSlide}
@@ -126,12 +137,25 @@ export const AchievementsView: React.FC<AchievementsViewProps> = ({
                             <ChevronRightIcon />
                         </button>
 
-                        <img 
-                            key={currentIndex}
-                            src={achievements[currentIndex].imageUrl} 
-                            alt={achievements[currentIndex].title} 
-                            className="w-full h-full object-contain animate-fade-in"
-                        />
+                        {!imageError ? (
+                            <img 
+                                key={currentIndex}
+                                src={achievements[currentIndex].imageUrl} 
+                                alt={achievements[currentIndex].title} 
+                                className="w-full h-full object-contain animate-fade-in"
+                                onError={() => setImageError(true)}
+                            />
+                        ) : (
+                            <div className="flex flex-col items-center justify-center p-6 text-center animate-fade-in">
+                                <FallbackIcon />
+                                <p className="mt-4 text-lg font-semibold text-light-text-secondary dark:text-dark-text-secondary">
+                                    Image not available
+                                </p>
+                                <p className="text-xs text-gray-400 mt-1 max-w-xs">
+                                    Ensure assets are uploaded to GitHub.
+                                </p>
+                            </div>
+                        )}
                     </div>
 
                     {/* Text Content */}

@@ -135,32 +135,52 @@ export const cvData: CVData = {
     {
         title: "Engineering Excellence Award 2024",
         description: "Receiving the Engineering Services Excellence Award for Circular Economy digitalization initiatives.",
-        imageUrl: "https://placehold.co/600x800/ea580c/ffffff?text=Engineering+Excellence+Award"
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award1.jpg"
     },
+     {
+        title: "1st prize in upstream immersive industry Hackathon -Sustainabilty",
+        description: "Designed and develoepd ain AI and AR powered applciation Bassamah for Gamification of sustanbility for broader public adoption",
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award11.jpg"
+    }
     {
         title: "Citizen Development Days 2025",
         description: "Recognized for enterprise automation leadership and fostering digital innovation ecosystems.",
-        imageUrl: "https://placehold.co/600x800/ea580c/ffffff?text=Citizen+Development+Days"
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award2.jpg"
     },
     {
-        title: "MAHER AI Assistant Workbench",
+        title: "MAHER AI Agent Development Workbench",
         description: "Demonstrating the AI Assistant Development Workbench for Maintenance challenges.",
-        imageUrl: "https://placehold.co/800x600/ea580c/ffffff?text=MAHER+AI+Workbench"
+        imageUrl: "hhttps://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award3.jpg"
     },
     {
-        title: "Circular Economy Award",
+        title: "Presenting G-tlak on Circular economy initiative",
         description: "Corporate recognition for initiatives contributing to efficient resource utilization.",
-        imageUrl: "https://placehold.co/600x800/ea580c/ffffff?text=Circular+Economy+Award"
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award4.jpg"
     },
     {
-        title: "MAHER Robot Launch",
+        title: "MAHER Robotic Process Automation Recognition",
         description: "Speaking at the launch of the Maintenance Artificial Human Enterprise Robot (MAHER).",
-        imageUrl: "https://placehold.co/800x600/ea580c/ffffff?text=MAHER+Robot+Launch"
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award5.jpg"
     },
     {
-        title: "Award of Appreciation",
+        title: "Award Trouphy RPA",
         description: "In recognition of outstanding efforts and contributions to Maintenance Artificial Human Enterprise Robot (MAHER).",
-        imageUrl: "https://placehold.co/600x800/ea580c/ffffff?text=Award+of+Appreciation"
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award6.jpg"
+    },  
+    {
+        title: "2nd G-talk- Agentic AI launch",
+        description: "done beta Launch of AGentic AI platform -MAHER AI Asisstant.",
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award7.jpg"
+    },
+      {
+        title: "Presenrted Circuylar economy session in SOFPD Reliaiblty and Maintenance Conference",
+        description: "presented Excess Material management initiatve in SOFPD R&M Conference.",
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award6.jpg"
+    },
+     {
+        title: "ES 1st prize in circular economy by Engnieering services Business Line",
+        description: "Moment or pride with award trauphy",
+        imageUrl: "https://github.com/nileshb4u/nilesh-khedkar/blob/main/assets/award6.jpg"
     }
   ]
 };
