@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ChatAssistant } from './components/ChatAssistant';
 import { FullCvView } from './components/FullCvView';
@@ -135,7 +136,7 @@ const App: React.FC = () => {
                     <h2 className="text-lg md:text-2xl text-brand-primary font-semibold mt-1 font-heading">{cvData.header.title}</h2>
                 </div>
                 <p className="text-light-text-secondary dark:text-dark-text-secondary text-sm md:text-base max-w-xs md:max-w-lg mx-auto leading-relaxed px-4">
-                    Architecting AI-powered digital transformations for enterprise operations.
+                    Demystifying AI for industrial enterprise. Bridging the gap between engineering and practical AI solutions.
                 </p>
             </div>
 
@@ -158,7 +159,7 @@ const App: React.FC = () => {
                     className="w-full flex items-center justify-center px-6 py-4 bg-brand-primary hover:bg-brand-secondary text-white rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 font-bold text-lg"
                 >
                     <ChatIcon />
-                    Talk to my AI Assistant
+                    Consult with my AI Agent
                 </button>
                 
                 <button 
@@ -166,7 +167,7 @@ const App: React.FC = () => {
                     className="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-brand-light/50 dark:border-brand-secondary/50 text-brand-secondary dark:text-brand-light rounded-xl hover:bg-orange-50 dark:hover:bg-dark-bg-tertiary transition-colors font-bold shadow-sm text-base md:text-lg"
                 >
                     <TrophyIcon />
-                    View Achievements
+                    Deployment Successes
                 </button>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -175,7 +176,7 @@ const App: React.FC = () => {
                         className="flex items-center justify-center px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-xl hover:bg-orange-50 dark:hover:bg-dark-bg-tertiary transition-colors font-medium shadow-sm text-sm md:text-base"
                     >
                         <DocumentIcon />
-                        View Full CV
+                        View Full Profile
                     </button>
                     <a 
                         href={cvData.header.cvPdfUrl}
@@ -184,14 +185,14 @@ const App: React.FC = () => {
                         className="flex items-center justify-center px-4 py-3 bg-white dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary text-light-text-primary dark:text-dark-text-primary rounded-xl hover:bg-orange-50 dark:hover:bg-dark-bg-tertiary transition-colors font-medium shadow-sm text-sm md:text-base"
                     >
                         <DownloadIcon />
-                        Download PDF
+                        Download CV
                     </a>
                 </div>
             </div>
         </div>
 
         <footer className="absolute bottom-4 text-center text-xs text-light-text-secondary dark:text-dark-text-secondary opacity-60">
-            <p>&copy; {new Date().getFullYear()} Nilesh S. Khedkar.</p>
+            <p>&copy; {new Date().getFullYear()} Nilesh S. Khedkar. Practical AI Consulting.</p>
         </footer>
     </main>
   );
@@ -211,7 +212,7 @@ const App: React.FC = () => {
                 </button>
                 
                 <h1 className="text-base md:text-lg font-bold text-light-text-primary dark:text-dark-text-primary truncate font-heading flex-1 text-center px-2">
-                    {cvData.header.name}
+                    Consultant: Nilesh Khedkar
                 </h1>
 
                 <ThemeToggle />
