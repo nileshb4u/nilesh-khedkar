@@ -94,17 +94,17 @@ export const cvData: CVData = {
         title: "G-talk - Excess material management and applciation of digitalization 2024 ",
         description: "Presented a in person session which was broadcasted to more than 300 attendees on how deployment of digitalization and AI can improve maniteance practices ",
         imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award4.jpg"
-    }
+    },
     {
         title: "Annual achievement award by IS -SVP for introdcution of MAHER 2022",
         description: "Received a presidetgius recognition from Industrial services Senior VIce President for leading development and deployment of a Digitalization and AI long term initiative",
         imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award6.jpg"
-    }
+    },
     {
         title: "Annual achievement award by IS -SVP for introdcution of MAHER 2022",
         description: "Received a presidetgius recognition from Industrial services Senior VIce President for leading development and deployment of a Digitalization and AI long term initiative",
         imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award6.jpg"
-    }
+    },
   ]
 };
 
