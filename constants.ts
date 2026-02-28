@@ -78,17 +78,17 @@ export const cvData: CVData = {
     {
         title: "Agentic AI Launch",
         description: "Leading the beta launch of the MAHER Agentic AI platform, demonstrating practical LLM applications in heavy industry.",
-        imageUrl: "https://placehold.co/600x400?text=Agentic+AI+Launch"
+        imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award3.jpg"
     },
     {
         title: "Engineering Excellence 2024",
         description: "Recognition for the Circular Economy digitalization initiative, combining AI with sustainability.",
-        imageUrl: "https://placehold.co/600x400?text=Engineering+Excellence"
+        imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award1.jpg"
     },
     {
         title: "Hackathon Winner 2025",
         description: "Winning the Immersive Industry Hackathon by building a functional web application for industrial gamification in 48 hours.",
-        imageUrl: "https://placehold.co/600x400?text=Hackathon+Winner"
+        imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award11.jpg"
     }
   ]
 };
