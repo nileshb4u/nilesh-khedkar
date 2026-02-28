@@ -11,6 +11,9 @@ export const cvData: CVData = {
     github: "https://github.com/nileshb4u",
     researchGate: "https://www.researchgate.net/profile/Nilesh-Khedkar-4",
     twitter: "https://x.com/nileshb4u",
+    // To use your own image:
+    // 1. Place your image in the 'public/assets' folder (e.g., public/assets/my-photo.jpg)
+    // 2. Update this URL to: "/assets/my-photo.jpg"
     imageUrl: "https://placehold.co/128x128/e0e0e0/333333?text=NK",
     cvPdfUrl: "#",
   },
@@ -75,17 +78,17 @@ export const cvData: CVData = {
     {
         title: "Agentic AI Launch",
         description: "Leading the beta launch of the MAHER Agentic AI platform, demonstrating practical LLM applications in heavy industry.",
-        imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award8.jpg"
+        imageUrl: "https://placehold.co/600x400?text=Agentic+AI+Launch"
     },
     {
         title: "Engineering Excellence 2024",
         description: "Recognition for the Circular Economy digitalization initiative, combining AI with sustainability.",
-        imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award1.jpg"
+        imageUrl: "https://placehold.co/600x400?text=Engineering+Excellence"
     },
     {
         title: "Hackathon Winner 2025",
         description: "Winning the Immersive Industry Hackathon by building a functional web application for industrial gamification in 48 hours.",
-        imageUrl: "https://raw.githubusercontent.com/nileshb4u/nilesh-khedkar/main/assets/award7.jpg"
+        imageUrl: "https://placehold.co/600x400?text=Hackathon+Winner"
     }
   ]
 };

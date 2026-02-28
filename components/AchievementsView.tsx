@@ -144,6 +144,7 @@ export const AchievementsView: React.FC<AchievementsViewProps> = ({
                                 alt={achievements[currentIndex].title} 
                                 className="w-full h-full object-contain animate-fade-in"
                                 onError={() => setImageError(true)}
+                                referrerPolicy="no-referrer"
                             />
                         ) : (
                             <div className="flex flex-col items-center justify-center p-6 text-center animate-fade-in">
